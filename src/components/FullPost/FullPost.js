@@ -4,10 +4,10 @@ import './FullPost.css';
 
 class FullPost extends Component {
     render () {
-        let post = <p>Please select a Post!</p>;
-        post = (
+        let post = this.props.id === null ? <p style={{'textAlign': 'center'}}>Please select a Post!</p> :
+         (
             <div className="FullPost">
-                <h1>Title</h1>
+                <h1>Titile</h1>
                 <p>Content</p>
                 <div className="Edit">
                     <button className="Delete">Delete</button>

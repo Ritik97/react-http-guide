@@ -10,7 +10,17 @@ import './Blog.css';
 class Blog extends Component {
 
     state = {
-        posts: []
+        posts: [],
+        showFullPost: null
+    };
+
+    showPost = (index) => {
+        console.log(index);
+        // const post = {...this.state.posts[index]}
+        // console.log(post);
+        this.setState({
+            showFullPost: index
+        })
     };
 
     componentDidMount() {
@@ -30,8 +40,9 @@ class Blog extends Component {
 
     render() {
 
-        const posts = this.state.posts.map(post => {
-            return <Post key={post.id} title={post.title} author={post.author} />
+        const posts = this.state.posts.map((post, index) => {
+            return <Post key={post.id} title={post.title} author={post.author} 
+            clicked={() => this.showPost(index)} />
         })
 
         return (
@@ -40,7 +51,7 @@ class Blog extends Component {
                     {posts}
                 </section>
                 <section>
-                    <FullPost />
+                    <FullPost id={this.state.showFullPost} />
                 </section>
                 <section>
                     <NewPost />
