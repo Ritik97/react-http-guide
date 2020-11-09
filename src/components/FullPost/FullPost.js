@@ -23,14 +23,14 @@ class FullPost extends Component {
                         console.log(response.data)
                         this.setState({ loadedPost: response.data })
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => console.error(err))
     };
 
     deletePostHandler = (postId) => {
         console.log('delete post ' + postId);
         axios.delete('https://jsonplaceholder.typicode.com/posts/' + postId)
         .then(response => console.log(response))
-        .catch(err => console.log(err))
+        .catch(err => console.error(err))
     };
 
     render() {
