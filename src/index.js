@@ -5,6 +5,12 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import axios from 'axios';
 
+/** Apart from using interceptor, we can also set some global congifuration in other way. */
+
+axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
+axios.defaults.headers.post['Content-Type'] = 'appication/json';
+
+
 /** Sometimes, we need to execute some code globally, on every req sent and/or response received from anywhere in our app.
  * 'interceptor' is a method of the axios object which executes globally, everytime, on every res sent and/or res received.
  * This could be helpful in setting some auth headers, handling errors globally etc. Since 'index.js' is the most global file 
