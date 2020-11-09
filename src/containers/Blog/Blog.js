@@ -14,12 +14,12 @@ class Blog extends Component {
         showFullPost: null
     };
 
-    showPost = (index) => {
-        console.log(index);
+    showFullPostHandler = (postID) => {
+        console.log(postID);
         // const post = {...this.state.posts[index]}
         // console.log(post);
         this.setState({
-            showFullPost: index
+            showFullPost: postID
         })
     };
 
@@ -42,7 +42,7 @@ class Blog extends Component {
 
         const posts = this.state.posts.map((post, index) => {
             return <Post key={post.id} title={post.title} author={post.author} 
-            clicked={() => this.showPost(index)} />
+            clicked={() => this.showFullPostHandler(post.id)} />
         })
 
         return (
