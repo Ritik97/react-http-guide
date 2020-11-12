@@ -1,57 +1,17 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
+import { Route } from 'react-router-dom';
 
-import Post from '../../components/Post/Post';
-import FullPost from '../../components/FullPost/FullPost';
-import NewPost from '../../components/NewPost/NewPost';
 import './Blog.css';
+import Posts from './Posts/Posts';
 
 /** In Blog component, we will fetch the list of Posts from jsonplaceholder and render it. */
 class Blog extends Component {
 
-    state = {
-        posts: [],
-        showFullPost: null,
-        error: false
-    };
 
-    showFullPostHandler = (postID) => {
-        console.log(postID);
-        // const post = {...this.state.posts[index]}
-        // console.log(post);
-        this.setState({
-            showFullPost: postID
-        })
-    };
-
-    componentDidMount() {
-        axios.get('/posts')
-            .then(response => {
-                const posts = response.data.slice(0, 4); //fetching data from index 0 to 4
-                const updatedPosts = posts.map(post => {
-                    return {
-                        ...post,
-                        author: 'Ritik'
-                    }
-                });
-                this.setState({ posts: updatedPosts });
-                console.log(response);
-            })
-            .catch(err => {
-                /**Request don't always succedd. Therefore, we should have a way to handle it correctly. Either by 
-                 * logging it, or by showing it on the UI
-                */
-                console.error(err);
-                this.setState({ error: true })
-            })
-    };
 
     render() {
-        const posts = this.state.error ? <p style={{'textAlign' : 'center'}}>Something Went Wrong!</p> :
-             this.state.posts.map((post, index) => {
-            return <Post key={post.id} title={post.title} author={post.author} 
-            clicked={() => this.showFullPostHandler(post.id)} />
-        })
+
 
         return (
             <div>
@@ -61,15 +21,9 @@ class Blog extends Component {
                         <li> <a href='/new-post'>New Post</a> </li>
                     </ul>
                 </header>
-                <section className="Posts">
-                    {posts}
-                </section>
-                <section>
-                    <FullPost id={this.state.showFullPost} />
-                </section>
-                <section>
-                    <NewPost />
-                </section>
+                {/* <Route path='/home' exact render={() => <h1>Home</h1>} />
+                <Route path='/' render={() => <h2>New Post</h2>} /> */}
+                <Route path='/home' exact component={Posts} />
             </div>
         );
     }
