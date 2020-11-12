@@ -9,16 +9,17 @@ class FullPost extends Component {
         loadedPost: null
     };
 
-    componentDidUpdate() {
+    componentDidMount() {
+        console.log(this.props.match.params.id)
         /** If we simply update the state here, the FullPost component will be updated and componentDidUpdate() 
          * will run again. By this, our app will get into infinite loop. Therefore,
          * 1. First, we will check whether or not we got a id prop
          * 2. Then the loadedPost in the state must be null initially
          * 3. Also, if trying to load the same post which is already loaded, no need to make a req
         */
-        if (this.props.id)
-            if (!this.state.loadedPost || (this.state.loadedPost && this.props.id !== this.state.loadedPost.id))
-                axios.get('/posts/' + this.props.id)
+        if (this.props.match.params.id)
+            if (!this.state.loadedPost || (this.state.loadedPost && this.props.match.params.id !== this.state.loadedPost.id))
+                axios.get('/posts/' + this.props.match.params.id)
                     .then(response => {
                         this.setState({ loadedPost: response.data })
                     })
@@ -34,7 +35,7 @@ class FullPost extends Component {
 
     render() {
         let post = <p style={{ 'textAlign': 'center' }} > Please select a post! </p>
-        if (this.props.id) {
+        if (this.props.match.params.id) {
             post = <p style={{ 'textAlign': 'center' }} > Loading.... </p>
         }
         /** Loading the post and setting it to state would take some time. So, the post should only render when the state has been set completely */
