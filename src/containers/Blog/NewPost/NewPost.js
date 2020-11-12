@@ -21,10 +21,10 @@ class NewPost extends Component {
             author: this.state.author
         } /** newPost is a javascript object but axios will automatically convert it into JSON string */
         axios.post('/posts', newPost)
-        .then(response => {
-            console.log(response)
-        })
-        .catch(err => console.error(err))
+            .then(response => {
+                console.log(response)
+            })
+            .catch(err => console.error(err))
     };
 
     render() {
