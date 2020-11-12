@@ -11,7 +11,7 @@ class FullPost extends Component {
 
     componentDidUpdate() {
         /** If we simply update the state here, the FullPost component will be updated and componentDidUpdate() 
-         * will run again. By this, our app will get into infinite loop. THerefore,
+         * will run again. By this, our app will get into infinite loop. Therefore,
          * 1. First, we will check whether or not we got a id prop
          * 2. Then the loadedPost in the state must be null initially
          * 3. Also, if trying to load the same post which is already loaded, no need to make a req
