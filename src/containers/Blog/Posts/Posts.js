@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link}  from 'react-router-dom';
 import axios from 'axios';
 
 import Post from '../../../components/Post/Post';
@@ -12,12 +11,11 @@ class Posts extends Component {
     };
 
     showFullPostHandler = (postID) => {
-        console.log(postID);
-        // const post = {...this.state.posts[index]}
-        // console.log(post);
-        this.setState({
-            showFullPost: postID
-        })
+        /**Navigation btw pages works like a stack where the page on the top of the stack
+         * is always displayed. So, we will push the component with path '/postid. The PostID will be passed
+         * as a part of URL which could be extracted in FullPost component as this.props.match.params.id. Then,
+         * the get req can be made there with that ID, to get that single post. */
+        this.props.history.push('/' + postID);
     };
 
     componentDidMount() {
@@ -46,8 +44,8 @@ class Posts extends Component {
     render() {
         const posts = this.state.error ? <p style={{ 'textAlign': 'center' }}>Something Went Wrong!</p> :
             this.state.posts.map((post, index) => {
-                return <Link to={'/' + post.id} key={post.id}> <Post title={post.title} author={post.author}
-                    clicked={() => this.showFullPostHandler(post.id)} /> </Link>
+                return <Post key={post.id} title={post.title} author={post.author}
+                    clicked={() => this.showFullPostHandler(post.id)} />
             })
         return (
             <section className="Posts">
