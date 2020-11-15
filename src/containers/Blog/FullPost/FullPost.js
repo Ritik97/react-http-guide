@@ -17,8 +17,16 @@ class FullPost extends Component {
          * 2. Then the loadedPost in the state must be null initially
          * 3. Also, if trying to load the same post which is already loaded, no need to make a req
         */
+        this.loadData();
+    };
+
+    componentDidUpdate() {
+        this.loadData();
+    };
+
+    loadData() {
         if (this.props.match.params.id)
-            if (!this.state.loadedPost || (this.state.loadedPost && this.props.match.params.id !== this.state.loadedPost.id))
+            if (!this.state.loadedPost || (this.state.loadedPost && this.props.match.params.id != this.state.loadedPost.id))
                 axios.get('/posts/' + this.props.match.params.id)
                     .then(response => {
                         this.setState({ loadedPost: response.data })
@@ -29,8 +37,8 @@ class FullPost extends Component {
     deletePostHandler = (postId) => {
         console.log('delete post ' + postId);
         axios.delete('/posts/' + postId)
-        .then(response => console.log(response))
-        .catch(err => console.error(err))
+            .then(response => console.log(response))
+            .catch(err => console.error(err))
     };
 
     render() {
@@ -45,8 +53,8 @@ class FullPost extends Component {
                     <h1>{this.state.loadedPost.title}</h1>
                     <p>{this.state.loadedPost.body}</p>
                     <div className="Edit">
-                        <button className="Delete" 
-                        onClick={() => this.deletePostHandler(this.state.loadedPost.id)}>Delete</button>
+                        <button className="Delete"
+                            onClick={() => this.deletePostHandler(this.state.loadedPost.id)}>Delete</button>
                     </div>
                 </div>
 
